@@ -30,6 +30,8 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices';
+import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
+import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
 
 export default class ClassicEditor extends ClassicEditorBase {}
 
@@ -58,7 +60,9 @@ ClassicEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TextTransformation,
+	SourceEditing,
+	GeneralHtmlSupport
 ];
 
 // Editor configuration.
@@ -81,7 +85,9 @@ ClassicEditor.defaultConfig = {
 			'insertTable',
 			'mediaEmbed',
 			'undo',
-			'redo'
+			'redo',
+			'|',
+			'sourceEditing'
 		]
 	},
 	image: {
@@ -99,6 +105,21 @@ ClassicEditor.defaultConfig = {
 			'tableColumn',
 			'tableRow',
 			'mergeTableCells'
+		]
+	},
+	htmlSupport: {
+		allow: [
+			{
+				name: /.*/,
+				attributes: true,
+				classes: true,
+				styles: true
+			}
+		],
+		disallow: [
+			{
+				name: 'script'
+			}
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
